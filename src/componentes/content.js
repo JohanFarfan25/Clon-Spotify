@@ -3,11 +3,35 @@ import Dropdown from './Dropdown';
 import Listbox from './Listbox';
 import Detail from './Detail';
 import { Credentials } from './Credentials';
+import { Refrescar } from './Refresch';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
 
 
-const Contenido = () => { 
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        flexGrow: 1,
+        position: 'fixed',
+        bottom: theme.spacing(2),
+        right: theme.spacing(2),
+    },
+
+    menuButton: {
+        marginRight: theme.spacing(2),
+    },
+    title: {
+        flexGrow: 1,
+    },
+
+}));
+
+const Contenido = () => {
+
     const spotify = Credentials();
     console.log('RENDERING APP.JS');
 
@@ -18,7 +42,7 @@ const Contenido = () => {
         { Value: 3, name: 'C' }
 
     ];
-
+    const classes = useStyles();
     const [token, setToken] = useState('');
     const [genres, setGenres] = useState({ selectedGenre: '', listOfGenresFromAPI: [] });
     const [playlist, setPlaylist] = useState({ selectedPlaylist: '', listOfPlaylistFromAPI: [] });
@@ -114,7 +138,9 @@ const Contenido = () => {
 
     }
 
+
     return (
+
 
 
         <div className="container col-md-12" >
@@ -125,13 +151,16 @@ const Contenido = () => {
 
                     <Dropdown label="Lista  :" options={playlist.listOfPlaylistFromAPI} selectedValue={playlist.selectedPlaylist} changed={playlistChanged} />
                     <div className="col-sm-12 form-group px-0">
-                        <Button type='submit' variant="contained" color="primary" disableElevation> Buscar </Button>
+                        <Button size="medium" type='submit' variant="contained" color="primary" disableElevation> Buscar </Button>
+                    </div>
+                    <div className="col-sm-12 form-group px-0">
+                        <Refrescar></Refrescar>
                     </div>
                 </div>
 
 
                 <div className="Row col-lg-8" data-toggle="modal" data-target="#smallmodal">
-                    <h3>Lista de Canciones</h3>
+                    <h3>  Lista de Canciones</h3>
                     <Listbox label="" items={tracks.listOfTracksFromAPI} clicked={listboxClicked} />
                 </div>
 
@@ -144,11 +173,18 @@ const Contenido = () => {
 
                 <div className="modal-dialog modal-sm" role="document" >
                     <div className="modal-content" >
-                        <div className="modal-header" ></div>
-                        <div className="modal-body" > {
-                            trackDetail && < Detail {...trackDetail}
-                            />} </div> <div className="modal-footer" >
-                            <Button variant="contained" color="primary" disableElevation data-dismiss="modal" >
+                        <AppBar position="static">
+                            <Toolbar>
+                                <Typography variant="h5" className={classes.title}>
+                                    Detalle
+                            </Typography>
+                            </Toolbar>
+                        </AppBar>
+                        <div className="modal-body">
+                            {trackDetail && < Detail {...trackDetail} />}
+                        </div>
+                        <div className="modal-footer">
+                            <Button variant="contained" color="secondary" disableElevation data-dismiss="modal" >
                                 Regresar
                             </Button>
                         </div>

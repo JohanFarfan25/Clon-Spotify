@@ -45,7 +45,7 @@ const Dropdown = props => {
                     id="demo-simple-select-required">
                     
                     <MenuItem key={0}>
-                        <em>Select...</em>
+                        <em>Seleccionar...</em>
                     </MenuItem>
                     {props.options.map((item, idx) => <MenuItem key={idx + 1} value={item.id}>{item.name}</MenuItem>)}
                 </Select>
