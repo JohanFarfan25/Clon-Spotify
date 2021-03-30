@@ -7,7 +7,7 @@ import axios from 'axios';
 import Button from '@material-ui/core/Button';
 
 
-const Contenido = () => {
+const Contenido = () => { 
     const spotify = Credentials();
     console.log('RENDERING APP.JS');
 
@@ -127,10 +127,9 @@ const Contenido = () => {
                     <div className="col-sm-12 form-group px-0">
                         <Button type='submit' variant="contained" color="primary" disableElevation> Buscar </Button>
                     </div>
-                    
                 </div>
 
-                
+
                 <div className="Row col-lg-8" data-toggle="modal" data-target="#smallmodal">
                     <h3>Lista de Canciones</h3>
                     <Listbox label="" items={tracks.listOfTracksFromAPI} clicked={listboxClicked} />
@@ -143,13 +142,12 @@ const Contenido = () => {
             <div className="modal fade" id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel"
                 aria-hidden="true">
 
-                <div className="modal-dialog modal-sm"  role="document" >
+                <div className="modal-dialog modal-sm" role="document" >
                     <div className="modal-content" >
                         <div className="modal-header" ></div>
-                        <div className="modal-body" >
-                            {trackDetail && < Detail {...trackDetail} />}
-                        </div>
-                        <div className="modal-footer" >
+                        <div className="modal-body" > {
+                            trackDetail && < Detail {...trackDetail}
+                            />} </div> <div className="modal-footer" >
                             <Button variant="contained" color="primary" disableElevation data-dismiss="modal" >
                                 Regresar
                             </Button>
